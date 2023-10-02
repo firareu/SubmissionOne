@@ -66,12 +66,14 @@ class DetailActivity : AppCompatActivity() {
                 checkInternetConnection(it)
             }
         }
-        detailViewModel.detailUser.observe(this, { userResponse ->
-            val factory: FavViewModelFactory = FavViewModelFactory.getDatabase(application)
-            val viewModel: FavViewModel by viewModels {
-                factory
-            }
+        val factory: FavViewModelFactory = FavViewModelFactory.getDatabase(application)
+        val viewModel: FavViewModel by viewModels {
+            factory
+        }
 
+
+        viewModel.detailUser.observe(this, { userResponse ->
+            Toast.makeText(this, "keklik ko bg", Toast.LENGTH_LONG).show()
             val fabFavorite = binding.ivBookmark
 
             viewModel.isFavorite.observe(this) { isFavorite ->
@@ -178,6 +180,7 @@ class DetailActivity : AppCompatActivity() {
         const val KEY_USER = "user"
         const val EXTRA_USERNAME = "username"
         const val USER_DATA_FAVORITE = "user_data_favorite"
+        const val EXTRA_LOGIN = "extra_login"
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.follower,

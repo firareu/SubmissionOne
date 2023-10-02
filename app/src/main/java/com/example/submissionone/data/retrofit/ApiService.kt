@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     companion object{
-        const val apiKey = "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"
+        const val apiKey = "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"
     }
     @GET("users/{user}")
     @Headers("Authorization: token $apiKey")

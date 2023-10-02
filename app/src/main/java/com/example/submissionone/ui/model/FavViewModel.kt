@@ -6,12 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.submissionone.data.response.UserResponse
 import com.example.submissionone.local.FavRepository
 import com.example.submissionone.local.entity.FavEntity
 import kotlinx.coroutines.launch
 
 class FavViewModel(private val favRepository: FavRepository) : ViewModel() {
-
+    private val _detailUser = MutableLiveData<UserResponse?>()
+    val detailUser: LiveData<UserResponse?> = _detailUser
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> = _isFavorite
 

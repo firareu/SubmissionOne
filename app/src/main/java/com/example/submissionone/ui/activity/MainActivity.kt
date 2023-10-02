@@ -12,7 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import com.example.submissionone.data.retrofit.NetworkConnection
 import com.example.submissionone.R
-import com.example.submissionone.adapter.ListUserAdapter
+//import com.example.submissionone.adapter.ListUserAdapter
 import com.example.submissionone.adapter.UserAdapter
 import com.example.submissionone.data.response.UserResponse
 import com.example.submissionone.databinding.ActivityMainBinding
