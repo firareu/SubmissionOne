@@ -43,9 +43,4 @@ class FavViewModel(private val favRepository: FavRepository) : ViewModel() {
         }
     }
 
-    //val loading = favRepository.isLoading
-    //fun getAllUser(q: String= "") = favRepository.getAllUser(q)
-
-    //fun getFavoriteUser() = favRepository.getAllFavoriteUser()
-
 }

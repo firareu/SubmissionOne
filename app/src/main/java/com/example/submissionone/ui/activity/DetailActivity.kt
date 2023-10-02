@@ -31,17 +31,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var userFollowAdapter: UserFollowAdapter
     private var username: String? = null
-    private lateinit var detailViewModel: DetailViewModel
-    private var isDelete = false
-    private var favEntity: FavEntity? = null
-    /*private val userAdapter: UserAdapter = UserAdapter { user ->
-        Intent(this@FavActivity, DetailActivity::class.java)
-            .apply {
-                putExtra("item", user)
-                startActivity(this)
-            }
-    }*/
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +39,6 @@ class DetailActivity : AppCompatActivity() {
 
         userFollowAdapter = UserFollowAdapter()
         val userdata = intent.getParcelableExtra<UserResponse>(KEY_USER)
-        //val userdataFavorite = intent?.getParcelableExtra<FavEntity>(USER_DATA_FAVORITE)
 
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
@@ -73,8 +61,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                val btnMain = Intent(this, MainActivity::class.java)
-                startActivity(btnMain)
+                finish()
                 return true
             }
 
@@ -90,7 +77,7 @@ class DetailActivity : AppCompatActivity() {
         //binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun checkInternetConnection(username: String) {
+    private fun checkInternetConnection(username:  String) {
         val networkConnection = NetworkConnection(applicationContext)
         networkConnection.observe(this, { isConnected ->
             if (isConnected) {
@@ -134,13 +121,10 @@ class DetailActivity : AppCompatActivity() {
                             //Toast.makeText(this, "keklik ko bg listenernya", Toast.LENGTH_LONG).show()
                             username?.let { username ->
                                 val isCurrentlyFavorite = viewModel.isFavorite.value ?: false
-                                Toast.makeText(this, "masok bg", Toast.LENGTH_LONG).show()
                                 if (isCurrentlyFavorite == true) {
-                                    Toast.makeText(this, "coba 1 yes", Toast.LENGTH_LONG).show()
                                     val favEntity = FavEntity(username, userResponse.avatarUrl, userResponse.htmlUrl, false)
                                     viewModel.removeFavoriteUser(favEntity)
                                 } else {
-                                    Toast.makeText(this, "coba 2 yes", Toast.LENGTH_LONG).show()
                                     val favEntity = FavEntity(username, userResponse.avatarUrl, userResponse.htmlUrl, true)
                                     viewModel.addFavoriteUser(favEntity)
                                 }
@@ -193,9 +177,6 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_USER = "user"
-        const val EXTRA_USERNAME = "username"
-        const val USER_DATA_FAVORITE = "user_data_favorite"
-        const val EXTRA_LOGIN = "extra_login"
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.follower,

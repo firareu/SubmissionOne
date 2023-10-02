@@ -18,7 +18,6 @@ import com.example.submissionone.data.response.UserResponse
 import com.example.submissionone.databinding.ActivityMainBinding
 import com.example.submissionone.ui.model.FavViewModel
 import com.example.submissionone.ui.model.MainViewModel
-import com.example.submissionone.local.Result
 import com.example.submissionone.ui.model.FavViewModelFactory
 
 class MainActivity: AppCompatActivity() {
