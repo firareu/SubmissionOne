@@ -154,8 +154,12 @@ class MainActivity: AppCompatActivity() {
         when (item.itemId) {
             R.id.action_fav -> {
                 val intentfav = Intent(this, FavActivity::class.java)
-                //intent.putParcelableArrayListExtra(FavActivity.EXTRA_FAV_USERS, ArrayList(userAdapter.getFavList()))
                 startActivity(intentfav)
+                return true
+            }
+            R.id.action_setting -> {
+                val intentSetting = Intent(this, SettingActivity::class.java)
+                startActivity(intentSetting)
                 return true
             }
         }

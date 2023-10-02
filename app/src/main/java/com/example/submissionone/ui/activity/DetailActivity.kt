@@ -66,37 +66,7 @@ class DetailActivity : AppCompatActivity() {
                 checkInternetConnection(it)
             }
         }
-        val factory: FavViewModelFactory = FavViewModelFactory.getDatabase(application)
-        val viewModel: FavViewModel by viewModels {
-            factory
-        }
 
-
-        viewModel.detailUser.observe(this, { userResponse ->
-            Toast.makeText(this, "keklik ko bg", Toast.LENGTH_LONG).show()
-            val fabFavorite = binding.ivBookmark
-
-            viewModel.isFavorite.observe(this) { isFavorite ->
-                if (isFavorite) {
-                    fabFavorite.setImageResource(R.drawable.baseline_favorite_24)
-                } else {
-                    fabFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
-                }
-            }
-
-            fabFavorite.setOnClickListener {
-                username?.let { username ->
-                    val isCurrentlyFavorite = viewModel.isFavorite.value ?: false
-                    if (isCurrentlyFavorite) {
-                        val favEntity = FavEntity(username, userResponse?.avatarUrl, userResponse?.htmlUrl, false)
-                        viewModel.removeFavoriteUser(favEntity)
-                    } else {
-                        val favEntity = FavEntity(username, userResponse?.avatarUrl, userResponse?.htmlUrl,true)
-                        viewModel.addFavoriteUser(favEntity)
-                    }
-                }
-            }
-        })
     }
 
 
@@ -110,6 +80,14 @@ class DetailActivity : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun darkmode(apakah: Boolean){
+        //binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    fun brightmode(apakah: Boolean){
+        //binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun checkInternetConnection(username: String) {
@@ -131,6 +109,43 @@ class DetailActivity : AppCompatActivity() {
                         setData(userResponse)
                         initViewPagerAndTabs(userResponse)
 
+                        // fav klik
+                        val factory: FavViewModelFactory = FavViewModelFactory.getDatabase(application)
+                        val viewModel: FavViewModel by viewModels {
+                            factory
+                        }
+                        val fabFavorite = binding.ivBookmark
+
+                        // Pastikan viewModel.isFavorite telah diinisialisasi sebelum mengaksesnya
+                        viewModel.isFavorite.observe(this) { isFavorite ->
+                            Toast.makeText(this, "keklik ko bg", Toast.LENGTH_LONG).show()
+                            if (isFavorite != null) {
+                                if (isFavorite) {
+                                    fabFavorite.setImageResource(R.drawable.baseline_favorite_24)
+                                } else {
+                                    fabFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+                                }
+                            }
+                        }
+                        username?.let {
+                            viewModel.checkIsFavorite(it)
+                        }
+                        fabFavorite.setOnClickListener {
+                            //Toast.makeText(this, "keklik ko bg listenernya", Toast.LENGTH_LONG).show()
+                            username?.let { username ->
+                                val isCurrentlyFavorite = viewModel.isFavorite.value ?: false
+                                Toast.makeText(this, "masok bg", Toast.LENGTH_LONG).show()
+                                if (isCurrentlyFavorite == true) {
+                                    Toast.makeText(this, "coba 1 yes", Toast.LENGTH_LONG).show()
+                                    val favEntity = FavEntity(username, userResponse.avatarUrl, userResponse.htmlUrl, false)
+                                    viewModel.removeFavoriteUser(favEntity)
+                                } else {
+                                    Toast.makeText(this, "coba 2 yes", Toast.LENGTH_LONG).show()
+                                    val favEntity = FavEntity(username, userResponse.avatarUrl, userResponse.htmlUrl, true)
+                                    viewModel.addFavoriteUser(favEntity)
+                                }
+                            }
+                        }
 
 
                     } else {

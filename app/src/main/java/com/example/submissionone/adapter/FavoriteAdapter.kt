@@ -1,6 +1,7 @@
 package com.example.submissionone.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,46 +14,35 @@ import com.example.submissionone.R
 import com.example.submissionone.databinding.ItemUserBinding
 import com.example.submissionone.local.entity.FavEntity
 import com.example.submissionone.ui.activity.DetailActivity
+import com.example.submissionone.ui.activity.DetailActivity.Companion.EXTRA_USERNAME
 
-class FavoriteAdapter(private val onFavoriteClick : (FavEntity)->Unit) : ListAdapter<FavEntity, FavoriteAdapter.MyViewHolder>(
-    DIFF_CALLBACK
-) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+class FavoriteAdapter: androidx.recyclerview.widget.ListAdapter<FavEntity, FavoriteAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FavoriteAdapter.MyViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
-
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user)
-
-        val ivBookmark = holder.binding.ivBookmark
-        if (user.isFavorite){
-            ivBookmark.setImageDrawable(ContextCompat.getDrawable(ivBookmark.context, R.drawable.baseline_favorite_24))
-        }else{
-            ivBookmark.setImageDrawable(ContextCompat.getDrawable(ivBookmark.context, R.drawable.baseline_favorite_border_24))
-        }
-        ivBookmark.setOnClickListener{
-            notifyItemChanged(position)
-            onFavoriteClick(user)
+    override fun onBindViewHolder(holder: FavoriteAdapter.MyViewHolder, position: Int) {
+        val favorite = getItem(position)
+        holder.bind(favorite)
+        holder.itemView.setOnClickListener {
+            val context: Context = holder.itemView.context
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(EXTRA_USERNAME, favorite.username)
+            context.startActivity(intent)
         }
     }
 
-    class MyViewHolder(val binding: ItemUserBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(listUser: FavEntity) {
-            binding.textViewName.text = listUser.username
+    class MyViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: FavEntity) {
+            binding.textViewName.text = "${user.username}"
             Glide.with(binding.root.context)
-                .load(listUser.avatarUrl)
+                .load(user.avatarUrl)
                 .into(binding.imgItemPhoto)
-            binding.textViewUrl.text = listUser.htmlUrl
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_LOGIN, listUser.username)
-                itemView.context.startActivity(intent)
-            }
-
+            binding.textViewUrl.text = user.htmlUrl
         }
     }
 
@@ -62,11 +52,9 @@ class FavoriteAdapter(private val onFavoriteClick : (FavEntity)->Unit) : ListAda
                 return oldItem == newItem
             }
 
-            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: FavEntity, newItem: FavEntity): Boolean {
                 return oldItem == newItem
             }
         }
     }
-
 }
