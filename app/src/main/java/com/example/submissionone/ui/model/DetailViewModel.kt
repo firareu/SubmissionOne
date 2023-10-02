@@ -41,4 +41,6 @@ class DetailViewModel(username: String) : ViewModel() {
         super.onCleared()
         // Cancel any ongoing background tasks or coroutines here if needed.
     }
+
+
 }

@@ -2,9 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/baseline_account_circle_24"
-
-        android:id="@+id/action_profile"
-        android:title="@string/btn_profile"
+        android:icon="@drawable/baseline_favorite_24"
+        android:id="@+id/action_fav"
+        android:title="@string/btn_fav"
+        app:showAsAction="always"/>
+    <item
+        android:icon="@drawable/setting"
+        android:id="@+id/action_setting"
+        android:title="@string/btn_setting"
         app:showAsAction="always"/>
 </menu>

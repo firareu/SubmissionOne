@@ -10,23 +10,23 @@ import retrofit2.http.Query
 
 interface ApiService {
     companion object{
-        const val apiKey = "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"
+        const val apiKey = "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"
     }
     @GET("users/{user}")
     @Headers("Authorization: token $apiKey")
-    fun getUserGithubDetail(
+    suspend fun getUserGithubDetail(
         @Path("user") usergithub: String
     ): UserResponse
 
     @GET("users/{user}/followers")
     @Headers("Authorization: token $apiKey")
-    fun getUserGithubFollowers(
+    suspend fun getUserGithubFollowers(
         @Path("user") usergithub: String
     ): ArrayList<UserResponse>
 
     @GET("users/{user}/following")
     @Headers("Authorization: token $apiKey")
-    fun getUserGithubFollowing(
+    suspend fun getUserGithubFollowing(
         @Path("user") usergithub: String
     ): ArrayList<UserResponse>
 

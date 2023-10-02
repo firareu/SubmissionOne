@@ -1,4 +1,4 @@
-package com.example.submissionone
+package com.example.submissionone.data.retrofit
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

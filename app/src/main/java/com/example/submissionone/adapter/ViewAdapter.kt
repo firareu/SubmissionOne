@@ -37,6 +37,7 @@ class ViewAdapter: RecyclerView.Adapter<ViewAdapter.ViewHolder>() {
             binding.textViewName.text = user.login
             Glide.with(binding.root.context)
                 .load(user.avatarUrl)
+                .circleCrop()
                 .into(binding.imgItemPhoto)
             binding.textViewUrl.text = user.htmlUrl
         }

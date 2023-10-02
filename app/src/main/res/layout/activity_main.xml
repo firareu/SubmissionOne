@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
     <androidx.appcompat.widget.SearchView
@@ -17,9 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/search"
-        app:layout_constraintBottom_toTopOf="@+id/rv_Search">
+        app:layout_constraintBottom_toTopOf="@+id/rv_Search"/>
 
-    </androidx.appcompat.widget.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_Search"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_search"/>
+        tools:listitem="@layout/item_user"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

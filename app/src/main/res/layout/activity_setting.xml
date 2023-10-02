@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.activity.SettingActivity">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/settingTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:showText="true"
+        android:thumb="@drawable/bola"
+        android:textOn="@string/dark"
+        android:textOff="@string/light"
+        app:track="@drawable/track"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_bright"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/baseline_brightness_7_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settingTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/brightness_icon_description" />
+
+    <ImageView
+        android:id="@+id/iv_night"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/baseline_bedtime_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/settingTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/night_icon_description" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

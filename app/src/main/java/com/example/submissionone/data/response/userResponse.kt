@@ -8,7 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class UserResponse(
 
 
-
 	@field:SerializedName("gists_url")
 	val gistsUrl: String,
 
@@ -63,11 +62,10 @@ data class UserResponse(
 	@field:SerializedName("node_id")
 	val nodeId: String,
 
-	@field:SerializedName("name")
-	val name: String?,
-
 	@field:SerializedName("organizations_url")
 	val organizationsUrl: String,
+
+	val name: String?,
 
 	val bio: String?,
 

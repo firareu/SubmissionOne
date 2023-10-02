@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.submissionone.data.response.SearchResponse
 import com.example.submissionone.data.response.UserResponse
 import com.example.submissionone.data.retrofit.ApiConfig
+import com.example.submissionone.local.entity.FavEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
